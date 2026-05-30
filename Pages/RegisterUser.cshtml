@@ -1,0 +1,103 @@
+@page
+@model RegisterUserModel
+@{
+    ViewData["Title"] = "Register User";
+}
+
+<!-- Page Header Bar -->
+<div class="header-bar">
+    <div class="page-title">
+        <h1>User & Member Registration</h1>
+        <p>Register new library patrons. Members are authorized to borrow physical book titles, while Registered Visitors are restricted to reference-only reading sessions.</p>
+    </div>
+</div>
+
+<!-- Dynamic Notifications -->
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="custom-alert success">
+        <span class="custom-alert-icon">✓</span>
+        <div class="custom-alert-content">
+            <div class="custom-alert-title">User Account Created</div>
+            <div class="custom-alert-desc">@Model.SuccessMessage</div>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="custom-alert danger">
+        <span class="custom-alert-icon">⚠</span>
+        <div class="custom-alert-content">
+            <div class="custom-alert-title">Registration Failed</div>
+            <div class="custom-alert-desc">@Model.ErrorMessage</div>
+        </div>
+    </div>
+}
+
+<!-- Form Container -->
+<div class="glass-panel">
+    <div class="section-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 1rem;">
+        <h2>Enter Borrower Profile Details</h2>
+    </div>
+
+    <form method="post">
+        <div class="form-grid">
+            <!-- Full Name -->
+            <div class="form-group full-width">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" placeholder="e.g. Kasun Fernando" />
+                <span asp-validation-for="Name" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- NIC Number -->
+            <div class="form-group">
+                <label asp-for="NIC" class="form-label"></label>
+                <input asp-for="NIC" class="form-control" placeholder="e.g. 199512938493 or 951293849V" />
+                <span asp-validation-for="NIC" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Sex -->
+            <div class="form-group">
+                <label asp-for="Sex" class="form-label">Sex / Gender Identification</label>
+                <select asp-for="Sex" class="form-control form-select">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span asp-validation-for="Sex" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- User Type -->
+            <div class="form-group">
+                <label asp-for="UserType" class="form-label"></label>
+                <select asp-for="UserType" class="form-control form-select">
+                    <option value="Member">Registered Member (Authorized for Loans)</option>
+                    <option value="Visitor">Registered Visitor (Reference Only)</option>
+                </select>
+                <span asp-validation-for="UserType" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- User Number -->
+            <div class="form-group">
+                <label asp-for="UserNumber" class="form-label"></label>
+                <input asp-for="UserNumber" class="form-control" placeholder="Leave blank to auto-generate (e.g. MEM0006)" />
+                <span asp-validation-for="UserNumber" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group full-width">
+                <label asp-for="Address" class="form-label">Residential Address</label>
+                <textarea asp-for="Address" rows="3" class="form-control" placeholder="e.g. No 123, Galle Road, Colombo 03, Sri Lanka"></textarea>
+                <span asp-validation-for="Address" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; border-top: 1px solid var(--panel-border); padding-top: 1.5rem; margin-top: 1rem;">
+            <button type="reset" class="btn btn-secondary">Clear Profile</button>
+            <button type="submit" class="btn btn-primary">
+                Register Borrower Profile
+            </button>
+        </div>
+    </form>
+</div>

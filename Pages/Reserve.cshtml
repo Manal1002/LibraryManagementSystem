@@ -1,0 +1,100 @@
+@page
+@model ReserveModel
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<!-- Page Header Bar -->
+<div class="header-bar">
+    <div class="page-title">
+        <h1>Book Reservation holds</h1>
+        <p>Register book titles under reservation queues. When a physical copy of this title is returned, the system will lock it and notify the oldest pending reserver.</p>
+    </div>
+</div>
+
+<!-- Alerts -->
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="custom-alert success">
+        <span class="custom-alert-icon">✓</span>
+        <div class="custom-alert-content">
+            <div class="custom-alert-title">Reservation Queue Logged</div>
+            <div class="custom-alert-desc">@Model.SuccessMessage</div>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="custom-alert danger">
+        <span class="custom-alert-icon">⚠</span>
+        <div class="custom-alert-content">
+            <div class="custom-alert-title">Reservation Blocked</div>
+            <div class="custom-alert-desc">@Model.ErrorMessage</div>
+        </div>
+    </div>
+}
+
+<div class="dashboard-grid" style="grid-template-columns: 1.5fr 1fr; gap: 2rem;">
+    <!-- Form Panel -->
+    <div class="glass-panel">
+        <div class="section-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 1rem;">
+            <h2>Place Title Hold Queue</h2>
+        </div>
+
+        <form method="post">
+            <div class="form-grid" style="grid-template-columns: 1fr;">
+                <!-- Book Accession Number -->
+                <div class="form-group">
+                    <label asp-for="AccessionNumber" class="form-label"></label>
+                    <input asp-for="AccessionNumber" class="form-control" placeholder="e.g. S0001" />
+                    <span asp-validation-for="AccessionNumber" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+                    <small style="color: var(--text-muted); margin-top: 0.25rem;">Enter the book accession number (ClassificationLetter + 4-Digit Serial).</small>
+                </div>
+
+                <!-- Borrower Number -->
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label asp-for="UserNumber" class="form-label"></label>
+                    <input asp-for="UserNumber" class="form-control" placeholder="e.g. MEM0001" />
+                    <span asp-validation-for="UserNumber" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+                    <small style="color: var(--text-muted); margin-top: 0.25rem;">Only Registered Members are permitted to place holds. Visitors cannot reserve.</small>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 1rem; border-top: 1px solid var(--panel-border); padding-top: 1.5rem; margin-top: 2rem;">
+                <button type="reset" class="btn btn-secondary">Clear Fields</button>
+                <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);">
+                    Queue Reservation Hold
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Info Advisory -->
+    <div class="glass-panel" style="background: rgba(56, 189, 248, 0.03); border-color: rgba(56, 189, 248, 0.1);">
+        <div class="section-header" style="margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+            <h2 style="color: var(--color-primary); font-size: 1.15rem;">Reservation Queue Mechanics</h2>
+        </div>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+            <li style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                <span style="color: var(--color-primary); font-weight: bold;">✦</span>
+                <div>
+                    <strong>Title-Level Holds:</strong> Reservations are filed against the overarching *Book Title* (Accession number), not an individual physical copy.
+                </div>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                <span style="color: var(--color-primary); font-weight: bold;">✦</span>
+                <div>
+                    <strong>First-In, First-Out Queue:</strong> The system orders holds chronologically. When a copy of this title is returned, the patron with the oldest reservation is fulfilled first.
+                </div>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                <span style="color: var(--color-primary); font-weight: bold;">✦</span>
+                <div>
+                    <strong>Hold Locks:</strong> The returned physical copy changes status to **'SetAside'** and cannot be borrowed by any other user until the reservation hold is cleared or claimed.
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

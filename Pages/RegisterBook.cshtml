@@ -1,0 +1,103 @@
+@page
+@model RegisterBookModel
+@{
+    ViewData["Title"] = "Register Book";
+}
+
+<!-- Page Header Bar -->
+<div class="header-bar">
+    <div class="page-title">
+        <h1>Book Registration Process</h1>
+        <p>Register a new book title in the Sarasavi Catalog. The system will automatically compute the classification-specific serial accession and physical copy numbers.</p>
+    </div>
+</div>
+
+<!-- Alert notifications -->
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="custom-alert success">
+        <span class="custom-alert-icon">✓</span>
+        <div class="custom-alert-content">
+            <div class="custom-alert-title">Book Title Registered</div>
+            <div class="custom-alert-desc">@Model.SuccessMessage</div>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="custom-alert danger">
+        <span class="custom-alert-icon">⚠</span>
+        <div class="custom-alert-content">
+            <div class="custom-alert-title">Registration Failed</div>
+            <div class="custom-alert-desc">@Model.ErrorMessage</div>
+        </div>
+    </div>
+}
+
+<!-- Form Container -->
+<div class="glass-panel">
+    <div class="section-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--panel-border); padding-bottom: 1rem;">
+        <h2>Enter Book & Copy Details</h2>
+    </div>
+
+    <form method="post">
+        <div class="form-grid">
+            <!-- Book Title -->
+            <div class="form-group full-width">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" placeholder="e.g. Access 2022 All-in-One Desk Reference for Dummies" />
+                <span asp-validation-for="Title" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Author -->
+            <div class="form-group">
+                <label asp-for="Author" class="form-label">Author Name(s)</label>
+                <input asp-for="Author" class="form-control" placeholder="e.g. Alan Simpson, Margaret Levine Young" />
+                <span asp-validation-for="Author" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Publisher -->
+            <div class="form-group">
+                <label asp-for="Publisher" class="form-label">Publisher</label>
+                <input asp-for="Publisher" class="form-control" placeholder="e.g. Wiley Publishing, Wiley-Blackwell" />
+                <span asp-validation-for="Publisher" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Genre -->
+            <div class="form-group">
+                <label asp-for="Genre" class="form-label">Book Genre</label>
+                <input asp-for="Genre" class="form-control" placeholder="e.g. Technology, Fiction, History" />
+                <span asp-validation-for="Genre" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Classification -->
+            <div class="form-group">
+                <label asp-for="Classification" class="form-label">Classification Code (1-Byte Letter)</label>
+                <input asp-for="Classification" class="form-control" placeholder="e.g. S for Science, L for Literature" style="text-transform: uppercase;" maxlength="1" />
+                <span asp-validation-for="Classification" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Total Copies -->
+            <div class="form-group">
+                <label asp-for="TotalCopies" class="form-label"></label>
+                <input asp-for="TotalCopies" type="number" class="form-control" min="1" max="10" />
+                <span asp-validation-for="TotalCopies" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+
+            <!-- Reference Copies -->
+            <div class="form-group">
+                <label asp-for="ReferenceCopies" class="form-label"></label>
+                <input asp-for="ReferenceCopies" type="number" class="form-control" min="0" max="10" />
+                <span asp-validation-for="ReferenceCopies" style="color: var(--color-danger); font-size: 0.8rem;"></span>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; border-top: 1px solid var(--panel-border); padding-top: 1.5rem; margin-top: 1rem;">
+            <button type="reset" class="btn btn-secondary">Reset Fields</button>
+            <button type="submit" class="btn btn-primary">
+                Register & Generate Copies
+            </button>
+        </div>
+    </form>
+</div>
