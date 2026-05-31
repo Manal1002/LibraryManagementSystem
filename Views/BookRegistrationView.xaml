@@ -1,0 +1,47 @@
+<UserControl x:Class="SarasaviLibrary.Views.BookRegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Add Book Form -->
+        <materialDesign:Card Margin="8" Padding="16" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Register New Book Title" FontSize="20" FontWeight="Medium" Margin="0 0 0 16" />
+                
+                <TextBox x:Name="TxtTitle" materialDesign:HintAssist.Hint="Book Title" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8" />
+                <TextBox x:Name="TxtPublisher" materialDesign:HintAssist.Hint="Publisher" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8" />
+                
+                <ComboBox x:Name="CboClassification" materialDesign:HintAssist.Hint="Classification" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8">
+                    <ComboBoxItem Content="Fiction (F)" Tag="F" />
+                    <ComboBoxItem Content="Non-Fiction (N)" Tag="N" />
+                    <ComboBoxItem Content="Science (S)" Tag="S" />
+                    <ComboBoxItem Content="History (H)" Tag="H" />
+                </ComboBox>
+
+                <Button Content="Register Book" Margin="0 24 0 0" Click="BtnRegisterBook_Click" />
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Add Copy Form -->
+        <materialDesign:Card Margin="8" Padding="16" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="Register Copy for Existing Book" FontSize="20" FontWeight="Medium" Margin="0 0 0 16" />
+                
+                <ComboBox x:Name="CboBooks" DisplayMemberPath="Title" materialDesign:HintAssist.Hint="Select Book Title" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8" />
+                
+                <CheckBox x:Name="ChkIsReference" Content="Is Reference Only (Not Borrowable)" Margin="0 16" />
+
+                <Button Content="Add Copy" Margin="0 16 0 0" Click="BtnAddCopy_Click" />
+                
+                <TextBlock x:Name="TxtFeedback" Margin="0 16 0 0" Foreground="Red" TextWrapping="Wrap" />
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

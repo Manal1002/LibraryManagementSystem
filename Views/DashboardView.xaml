@@ -1,0 +1,46 @@
+<UserControl x:Class="SarasaviLibrary.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Welcome Section -->
+        <TextBlock Text="Welcome to Sarasavi Library Management System" FontSize="28" FontWeight="Medium" Margin="0 0 0 20" Grid.Row="0"/>
+
+        <!-- Stat Cards -->
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="0 20 0 0">
+            <!-- Total Books -->
+            <materialDesign:Card Width="250" Height="150" Margin="10" Background="{DynamicResource PrimaryHueLightBrush}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="BookMultiple" Width="50" Height="50" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Total Books" FontSize="20" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+                    <TextBlock x:Name="TxtTotalBooks" Text="---" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </materialDesign:Card>
+            
+            <!-- Total Members -->
+            <materialDesign:Card Width="250" Height="150" Margin="10" Background="{DynamicResource SecondaryHueLightBrush}" Foreground="{DynamicResource SecondaryHueLightForegroundBrush}">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="AccountGroup" Width="50" Height="50" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Total Members" FontSize="20" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+                    <TextBlock x:Name="TxtTotalMembers" Text="---" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <!-- Books on Loan -->
+            <materialDesign:Card Width="250" Height="150" Margin="10" Background="Coral" Foreground="White">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="BookArrowRight" Width="50" Height="50" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Books on Loan" FontSize="20" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+                    <TextBlock x:Name="TxtBooksOnLoan" Text="---" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </materialDesign:Card>
+        </WrapPanel>
+    </Grid>
+</UserControl>

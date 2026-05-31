@@ -1,0 +1,34 @@
+<UserControl x:Class="SarasaviLibrary.Views.UserRegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <Grid Margin="16">
+        <materialDesign:Card MaxWidth="600" Margin="16" Padding="24" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Register New Library User" FontSize="22" FontWeight="Medium" Margin="0 0 0 24" HorizontalAlignment="Center"/>
+                
+                <TextBox x:Name="TxtName" materialDesign:HintAssist.Hint="Full Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8" />
+                
+                <ComboBox x:Name="CboSex" materialDesign:HintAssist.Hint="Sex" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 8">
+                    <ComboBoxItem Content="Male" />
+                    <ComboBoxItem Content="Female" />
+                    <ComboBoxItem Content="Other" />
+                </ComboBox>
+
+                <TextBox x:Name="TxtNIC" materialDesign:HintAssist.Hint="National Identity Card (NIC)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8" />
+                <TextBox x:Name="TxtAddress" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8" TextWrapping="Wrap" AcceptsReturn="True" Height="60"/>
+                
+                <StackPanel Orientation="Horizontal" Margin="0 16">
+                    <TextBlock Text="User Type:" VerticalAlignment="Center" Margin="0 0 16 0"/>
+                    <RadioButton x:Name="RdoMember" Content="Registered Member" IsChecked="True" Margin="0 0 16 0"/>
+                    <RadioButton x:Name="RdoVisitor" Content="Registered Visitor (Reference Only)"/>
+                </StackPanel>
+
+                <Button Content="Register User" Margin="0 24 0 0" Click="BtnRegister_Click" Height="40" FontSize="16"/>
+                <TextBlock x:Name="TxtFeedback" Margin="0 16 0 0" HorizontalAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

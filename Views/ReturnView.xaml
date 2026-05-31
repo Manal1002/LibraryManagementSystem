@@ -1,0 +1,31 @@
+<UserControl x:Class="SarasaviLibrary.Views.ReturnView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <Grid Margin="16">
+        <materialDesign:Card MaxWidth="600" Margin="16" Padding="24" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Return Book" FontSize="22" FontWeight="Medium" Margin="0 0 0 24" HorizontalAlignment="Center"/>
+                
+                <TextBox x:Name="TxtCopyNumber" materialDesign:HintAssist.Hint="Book Copy Number (e.g. F 0001-1)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 8" />
+                
+                <Button Content="Return Book" Margin="0 24 0 0" Click="BtnReturn_Click" Height="40" FontSize="16"/>
+                
+                <TextBlock x:Name="TxtFeedback" Margin="0 16 0 0" HorizontalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap"/>
+                
+                <!-- Reservation Notification Area -->
+                <materialDesign:Card x:Name="ReservationAlert" Visibility="Collapsed" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="0 20 0 0" Padding="16">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                            <materialDesign:PackIcon Kind="AlertCircleOutline" Margin="0 0 8 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="RESERVATION ALERT" FontWeight="Bold" FontSize="16" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock x:Name="TxtReservationAlert" TextWrapping="Wrap" />
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
